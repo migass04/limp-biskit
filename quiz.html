@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz | Limp Bizkit</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Permanent+Marker&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">LIMP <span>BIZKIT</span></div>
+    <ul class="nav-links">
+      <li><a href="index.html">História</a></li>
+      <li><a href="discografia.html">Discografia</a></li>
+      <li><a href="membros.html">Membros</a></li>
+      <li><a href="quiz.html" class="active">Quiz</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-content">
+      <p class="tagline">TESTA OS TEUS CONHECIMENTOS</p>
+      <h1>QUIZ LIMP BIZKIT</h1>
+      <p>As perguntas e respostas mudam de ordem em cada tentativa!</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="quiz-card" id="quiz-box">
+      <!-- Inserido dinamicamente via JS -->
+    </div>
+  </main>
+
+  <footer>
+    <p>Limp Bizkit Fan Portal &copy; 2026 — Quiz</p>
+  </footer>
+
+  <script>
+    const originalQuestions = [
+      {
+        question: "Qual é a cidade natal dos Limp Bizkit na Flórida?",
+        options: [
+          { text: "Miami", correct: false },
+          { text: "Jacksonville", correct: true },
+          { text: "Orlando", correct: false },
+          { text: "Tampa", correct: false }
+        ]
+      },
+      {
+        question: "Qual foi o sucesso de 1999 que continha o refrão icónico 'I did it all for the Nookie'?",
+        options: [
+          { text: "Break Stuff", correct: false },
+          { text: "Nookie", correct: true },
+          { text: "My Generation", correct: false },
+          { text: "Rollin'", correct: false }
+        ]
+      },
+      {
+        question: "Que famoso clássico dos The Who foi regravado pelos Limp Bizkit no álbum 'Results May Vary'?",
+        options: [
+          { text: "Behind Blue Eyes", correct: true },
+          { text: "My Generation", correct: false },
+          { text: "Baba O'Riley", correct: false },
+          { text: "Pinball Wizard", correct: false }
+        ]
+      },
+      {
+        question: "Qual o membro da banda conhecido pelas suas caracterizações de palco e pinturas corporais extravagantes?",
+        options: [
+          { text: "Fred Durst", correct: false },
+          { text: "Wes Borland", correct: true },
+          { text: "Sam Rivers", correct: false },
+          { text: "John Otto", correct: false }
+        ]
+      },
+      {
+        question: "Em que ano foi lançado o álbum de grande sucesso 'Chocolate Starfish and the Hot Dog Flavored Water'?",
+        options: [
+          { text: "1997", correct: false },
+          { text: "1999", correct: false },
+          { text: "2000", correct: true },
+          { text: "2003", correct: false }
+        ]
+      },
+      {
+        question: "Qual dos seguintes singles tornou-se viral em 2021 com a nova imagem 'Dad' de Fred Durst?",
+        options: [
+          { text: "Dad Vibes", correct: true },
+          { text: "Out of Style", correct: false },
+          { text: "Ready to Go", correct: false },
+          { text: "Gold Cobra", correct: false }
+        ]
+      },
+      {
+        question: "Antes de se juntar aos Limp Bizkit, a que famoso grupo de hip-hop pertencia o DJ Lethal?",
+        options: [
+          { text: "Cypress Hill", correct: false },
+          { text: "House of Pain", correct: true },
+          { text: "Wu-Tang Clan", correct: false },
+          { text: "Beastie Boys", correct: false }
+        ]
+      },
+      {
+        question: "Qual foi o álbum de estreia dos Limp Bizkit lançado em 1997?",
+        options: [
+          { text: "Significant Other", correct: false },
+          { text: "Three Dollar Bill, Y'all$", correct: true },
+          { text: "Results May Vary", correct: false },
+          { text: "STILL SUCKS", correct: false }
+        ]
+      }
+    ];
+
+    let currentQuestions = [];
+    let currentQuestionIndex = 0;
+    let score = 0;
+
+    const quizBox = document.getElementById('quiz-box');
+
+    // Algoritmo Fisher-Yates para baralhar arrays
+    function shuffleArray(array) {
+      const arr = [...array];
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    function startQuiz() {
+      score = 0;
+      currentQuestionIndex = 0;
+      
+      // Embaralha as perguntas e as respostas dentro de cada uma
+      currentQuestions = shuffleArray(originalQuestions).map(q => {
+        return {
+          ...q,
+          options: shuffleArray(q.options)
+        };
+      });
+
+      showQuestion();
+    }
+
+    function showQuestion() {
+      const q = currentQuestions[currentQuestionIndex];
+      const questionNumber = currentQuestionIndex + 1;
+
+      let optionsHTML = '';
+      q.options.forEach((opt) => {
+        optionsHTML += `
+          <button class="option-btn" onclick="selectOption(${opt.correct})">
+            ${opt.text}
+          </button>
+        `;
+      });
+
+      quizBox.innerHTML = `
+        <div class="quiz-header">
+          <span>Pergunta ${questionNumber} de ${currentQuestions.length}</span>
+          <span>Pontuação: ${score}</span>
+        </div>
+        <h2 class="question-title">${questionNumber}. ${q.question}</h2>
+        <div class="options-grid">
+          ${optionsHTML}
+        </div>
+      `;
+    }
+
+    function selectOption(isCorrect) {
+      if (isCorrect) score++;
+      currentQuestionIndex++;
+
+      if (currentQuestionIndex < currentQuestions.length) {
+        showQuestion();
+      } else {
+        showResults();
+      }
+    }
+
+    function showResults() {
+      quizBox.innerHTML = `
+        <div class="score-box">
+          <h2>Quiz Concluído!</h2>
+          <p style="margin-top:0.5rem; color:#aaa;">O teu resultado:</p>
+          <div class="score-number">${score} / ${currentQuestions.length}</div>
+          <button class="btn-retry" onclick="startQuiz()">
+            🔄 Tentar Novamente (Perguntas Baralhadas)
+          </button>
+        </div>
+      `;
+    }
+
+    startQuiz();
+  </script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Limp Bizkit | Portal Oficial de Fãs</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Permanent+Marker&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- NAVEGAÇÃO -->
+  <nav class="navbar">
+    <div class="logo">LIMP <span>BIZKIT</span></div>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">História</a></li>
+      <li><a href="discografia.html">Discografia</a></li>
+      <li><a href="membros.html">Membros</a></li>
+      <li><a href="quiz.html">Quiz</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO BANNER -->
+  <header class="hero">
+    <div class="hero-content">
+      <p class="tagline">OS REIS DO NU-METAL</p>
+      <h1>LIMP BIZKIT PORTAL</h1>
+      <p class="quote">"Keep rollin', rollin', rollin', rollin'!"</p>
+    </div>
+  </header>
+
+  <!-- LINHA DO TEMPO / HISTÓRIA -->
+  <main class="container">
+    <h2 style="text-align: center; margin-bottom: 1rem;">CRONOLOGIA DA BANDA</h2>
+    
+    <div class="timeline-stepper">
+      <button class="step-btn active" onclick="showEra('3db', this)">1997: Three Dollar Bill</button>
+      <button class="step-btn" onclick="showEra('so', this)">1999: Significant Other</button>
+      <button class="step-btn" onclick="showEra('cs', this)">2000: Chocolate Starfish</button>
+      <button class="step-btn" onclick="showEra('rmv', this)">2003: Results May Vary</button>
+      <button class="step-btn" onclick="showEra('gc', this)">2011: Gold Cobra</button>
+      <button class="step-btn" onclick="showEra('ss', this)">2021: STILL SUCKS</button>
+    </div>
+
+    <div id="era-content">
+      <div class="era-card">
+        <h3>1997: O Início com Three Dollar Bill, Y'all$</h3>
+        <p class="album-tag">Álbum de Estreia: Three Dollar Bill, Y'all$</p>
+        <p>Formados em Jacksonville, Flórida, os Limp Bizkit explodiram na cena underground misturando riffs pesados de guitarra com ritmos marcantes de hip-hop. O álbum de estreia destacou-se pela versão agressiva de "Faith" (original de George Michael) e abriu portas para digressões com os Korn.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <p>Limp Bizkit Fan Portal &copy; 2026 — Criado para os verdadeiros fãs.</p>
+  </footer>
+
+  <script>
+    const eras = {
+      '3db': {
+        title: "1997: O Início com Three Dollar Bill, Y'all$",
+        tag: "Álbum: Three Dollar Bill, Y'all$",
+        text: "Formados em Jacksonville, Flórida, os Limp Bizkit explodiram na cena underground misturando riffs pesados com ritmos de hip-hop. O álbum de estreia destacou-se pela versão agressiva de 'Faith' e abriu portas para digressões com os Korn."
+      },
+      'so': {
+        title: "1999: A Explosão Global de Significant Other",
+        tag: "Álbum: Significant Other",
+        text: "Com sucessos gigantescos como 'Nookie' e 'Break Stuff', o álbum alcançou o 1.º lugar no Billboard 200, vendendo mais de 600.000 cópias na primeira semana e afirmando a banda como os líderes do movimento Nu-Metal."
+      },
+      'cs': {
+        title: "2000: O Apoiante do Novo Milénio",
+        tag: "Álbum: Chocolate Starfish and the Hot Dog Flavored Water",
+        text: "Vendendo mais de 1 milhão de cópias na semana de lançamento, este álbum bateu recordes no rock. Temas como 'Rollin'' e 'My Generation' tornaram-se hinos mundiais da cultura jovem dos anos 2000."
+      },
+      'rmv': {
+        title: "2003: A Era de Transição",
+        tag: "Álbum: Results May Vary",
+        text: "Após a saída temporária do guitarrista Wes Borland, a banda experimentou novos sons e lançou uma versão memorável do clássico 'Behind Blue Eyes' dos The Who."
+      },
+      'gc': {
+        title: "2011: O Regresso da Formação Clássica",
+        tag: "Álbum: Gold Cobra",
+        text: "Com o regresso de Wes Borland, a formação original voltou aos estúdios e palcos mundiais com o energia e atitude ruidosa característica dos seus primeiros anos."
+      },
+      'ss': {
+        title: "2021: O Regresso Viral com STILL SUCKS",
+        tag: "Álbum: STILL SUCKS",
+        text: "Surpreendendo os fãs após anos de antecipação, a banda lançou 'STILL SUCKS', impulsionado pelo single 'Dad Vibes' e pela nova imagem icónica de Fred Durst."
+      }
+    };
+
+    function showEra(key, btn) {
+      document.querySelectorAll('.step-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      
+      const era = eras[key];
+      document.getElementById('era-content').innerHTML = `
+        <div class="era-card">
+          <h3>${era.title}</h3>
+          <p class="album-tag">${era.tag}</p>
+          <p>${era.text}</p>
+        </div>
+      `;
+    }
+  </script>
+</body>
+</html> 

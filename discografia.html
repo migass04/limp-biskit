@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Discografia | Limp Bizkit</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Permanent+Marker&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo">LIMP <span>BIZKIT</span></div>
+    <ul class="nav-links">
+      <li><a href="index.html">História</a></li>
+      <li><a href="discografia.html" class="active">Discografia</a></li>
+      <li><a href="membros.html">Membros</a></li>
+      <li><a href="quiz.html">Quiz</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-content">
+      <p class="tagline">ÁLBUNS DE ESTÚDIO</p>
+      <h1>DISCOGRAFIA</h1>
+      <p>Explora os discos e clica para ver as faixas completas de cada álbum.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="disco-grid">
+      
+      <div class="album-card">
+        <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=500" alt="Three Dollar Bill" class="album-cover">
+        <div class="album-info">
+          <span class="album-year">1997</span>
+          <h3 class="album-title">Three Dollar Bill, Y'all$</h3>
+          <button class="btn-tracklist" onclick="openModal('3db')">Ver Lista de Faixas</button>
+        </div>
+      </div>
+
+      <div class="album-card">
+        <img src="https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=500" alt="Significant Other" class="album-cover">
+        <div class="album-info">
+          <span class="album-year">1999</span>
+          <h3 class="album-title">Significant Other</h3>
+          <button class="btn-tracklist" onclick="openModal('so')">Ver Lista de Faixas</button>
+        </div>
+      </div>
+
+      <div class="album-card">
+        <img src="https://images.unsplash.com/photo-1498038432885-c6f3f1b912ee?w=500" alt="Chocolate Starfish" class="album-cover">
+        <div class="album-info">
+          <span class="album-year">2000</span>
+          <h3 class="album-title">Chocolate Starfish</h3>
+          <button class="btn-tracklist" onclick="openModal('cs')">Ver Lista de Faixas</button>
+        </div>
+      </div>
+
+      <div class="album-card">
+        <img src="https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=500" alt="STILL SUCKS" class="album-cover">
+        <div class="album-info">
+          <span class="album-year">2021</span>
+          <h3 class="album-title">STILL SUCKS</h3>
+          <button class="btn-tracklist" onclick="openModal('ss')">Ver Lista de Faixas</button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- MODAL DE FAIXAS -->
+  <div class="modal" id="trackModal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <h3 id="modalTitle" style="color: var(--red-accent);"></h3>
+      <ol class="track-list" id="modalTracks"></ol>
+    </div>
+  </div>
+
+  <footer>
+    <p>Limp Bizkit Fan Portal &copy; 2026 — Discografia</p>
+  </footer>
+
+  <script>
+    const tracklists = {
+      '3db': {
+        title: "Three Dollar Bill, Y'all$ (1997)",
+        tracks: ["Intro", "Pollution", "Counterfeit", "Stuck", "Nobody Loves Me", "Sour", "Faith", "Stink Finger"]
+      },
+      'so': {
+        title: "Significant Other (1999)",
+        tracks: ["Intro", "Just Like This", "Nookie", "Break Stuff", "Re-Arranged", "I'm Broke", "Nobody Like You", "Don't Go Off Wandering"]
+      },
+      'cs': {
+        title: "Chocolate Starfish and the Hot Dog Flavored Water (2000)",
+        tracks: ["Intro", "Hot Dog", "My Generation", "Full Nelson", "My Way", "Rollin' (Air Raid Vehicle)", "Livin' It Up", "Take a Look Around"]
+      },
+      'ss': {
+        title: "STILL SUCKS (2021)",
+        tracks: ["Out of Style", "Dirty Rotten Bizkit", "Dad Vibes", "Turn It Up, Bitch", "Don't Change", "You Bring Out the Worst in Me", "Snack"]
+      }
+    };
+
+    function openModal(key) {
+      const data = tracklists[key];
+      document.getElementById('modalTitle').innerText = data.title;
+      const listContainer = document.getElementById('modalTracks');
+      listContainer.innerHTML = '';
+      
+      data.tracks.forEach(track => {
+        const li = document.createElement('li');
+        li.innerText = track;
+        listContainer.appendChild(li);
+      });
+
+      document.getElementById('trackModal').classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('trackModal').classList.remove('active');
+    }
+  </script>
+</body>
+</html>
